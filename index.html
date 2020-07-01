@@ -4,8 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kImage</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script defer src="./src/main.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="./src/main.css" />
 </head>
 <body>
-  <h1> HELLO WORLD </h1>
+ 
+  <h1>Enter image theme:  </h1>
+  <form class='form-input'>
+    <input 
+      type='text'
+      name='name'
+      value=''
+      placeholder='paris, parks, beaches ...'
+      id='user-input'
+      />
+      <button id='submit'>Submit</button>
+
+  </form>
+
+  <h3 id='return-msg'></h3>
+
+  <section>
+    <div class='image-container'></div>
+  </section>
+
 </body>
 </html>

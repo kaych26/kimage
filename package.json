@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/kaych26/kimage/issues"
   },
-  "homepage": "https://github.com/kaych26/kimage#readme"
+  "homepage": "https://github.com/kaych26/kimage#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
 }
