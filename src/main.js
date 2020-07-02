@@ -85,6 +85,6 @@ form.addEventListener('submit', async (event) => {
       displayResults(current_page);
     }
   } else {
-    returnMsg.innerHTML = '<p>Enter a theme ...</p>';
+    returnMsg.innerHTML = 'No image ...';
   }
 });

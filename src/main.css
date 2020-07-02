@@ -27,7 +27,7 @@ header {
   color: #00808A;
   font-family: 'Work Sans', sans-serif;
   text-align: center;
-  padding: 3rem 0 2rem 0;
+  padding: 2rem 0 2rem 0;
   /* font-family: 'Merriweather', serif; */
 }
 
@@ -38,16 +38,19 @@ header {
 .user-input {
   padding: .4rem 4rem;
   text-align: center;
-  /* border: none; */
-
 }
 
 #submit {
-  /* color: orange; */
   padding: .4rem;
 }
+
 #submit:hover {
   background-color: #8AEAE2;
+}
+
+#return-msg {
+  padding-top: .8rem;
+  color: #C41A23;
 }
 
 .page-button {
@@ -77,21 +80,21 @@ header {
 .page-button button.active {
   background-color: #8AEAE2;
   box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
-
 }
 
 .img-thumbnail {
-  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  gap: 15px;
   cursor: pointer;
-  /* transition: 0.3s; */
- 
+  transition: 0.1s;
 }
 
-/* .img-thumbnail:hover {
-  opacity: 0.7;
-} */
-
-
+.img-thumbnail img:hover {
+  filter: grayscale(100%);
+  transform: scale(1.1);
+}
 
 .modal {
   display: none;
@@ -123,6 +126,35 @@ header {
 }
 .close:hover,
 .close:focus {
-  color: rgb(255, 0, 0);
+  color: #8AEAE2;
   cursor: pointer;
+}
+
+@media all and (max-width: 850px) {
+  .img-thumbnail {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+@media all and (max-width: 700px) {
+  .header-desc {
+    font-size: .9rem;
+    padding: 0 20px;
+  }
+  .img-thumbnail {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media all and (max-width: 500px) {
+  .header-desc {
+    font-size: .7rem;
+    padding: 0 20px;
+  }
+  .title {
+    font-size: 2rem;
+    padding: 2rem 0 2rem 0;
+  }
+  .img-thumbnail {
+  grid-template-columns: 1fr 1fr;
+  }
+
 }

@@ -9,13 +9,11 @@
   <script defer src="./src/main.js"></script>
   <link rel="stylesheet" type="text/css" media="screen" href="./src/main.css" />
 </head>
+
 <body>
   <header>
-    <!-- <div class='header'>  -->
       <img src="asset/Forbes_Logo.png" alt="Forbes" width="135px"/>
       <p class='header-desc'>Engineering Coding Assignment - Kay Chan</p>
-    <!-- </div> -->
-
   </header>
  
   <h1 class='title'>k-Image</h1>
@@ -28,21 +26,20 @@
       id='user-input'
       />
       <button id='submit'>Images</button>
-
+      <p id='return-msg'></p>
   </form>
 
-  <h3 id='return-msg'></h3>
 
-  <section>
+  <section class='image-list'>
     <div class='img-thumbnail'></div>
     <div class='page-button'></div>
-
-    <div class='modal'>
-      <span class='close'>x</span>
-      <img class='modalImage'  id='img01' />
-    </div>
-
   </section>
+
+  <div class='modal'>
+    <span class='close'>x</span>
+    <img class='modalImage'  id='img01' />
+  </div>
+
 
 </body>
 </html>
