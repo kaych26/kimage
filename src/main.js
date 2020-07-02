@@ -7,70 +7,77 @@ const form = document.querySelector('.form-input');
 const input = document.querySelector('#user-input');
 const returnMsg = document.querySelector('#return-msg');
 const pageWrapper = document.querySelector('.page-button');
-const imageContainer = document.querySelector('.image-container');
+const imgThumbnail = document.querySelector('.img-thumbnail');
+const modalElem = document.querySelector('#modal');
+const modalImage = document.querySelector('.modalImage');
 
-
-let current_page = 3;
+let current_page = 1;
 let image_per_page = 10;
-let images= '';
+let images = '';
 
-const setUpPages = total_img => {
-
+const setUpPages = (total_img) => {
   pageWrapper.innerHTML = '';
 
   let pages = Math.ceil(total_img / image_per_page);
-  // debugger;
-  
+
   for (let i = 1; i < pages + 1; i++) {
     let button = pageButtons(i);
     pageWrapper.appendChild(button);
   }
-  // for (let page = 1; page <= pages; page++) {
-  //   pageWrapper.innerHTML += `<button value=${page} class="page">${page}</button>`;
-  // }
 };
 
 const pageButtons = (page) => {
-  
   let button = document.createElement('button');
   button.innerText = page;
-  
-  if (current_page == page)
-    button.classList.add('active');
-  
+
+  if (current_page == page) button.classList.add('active');
+
   button.addEventListener('click', function () {
     current_page = page;
-    displayResults(current_page)
+    displayResults(current_page);
   });
-  
+
   return button;
-  
 };
 
-
 const displayResults = (page_idx) => {
-  let html = '';
-  let img = '';
-  imageContainer.innerHTML = '';
+  imgThumbnail.innerHTML = '';
   page_idx -= 1;
 
   let start = image_per_page * page_idx;
   let end = start + image_per_page;
+  // debugger;
   for (let i = start; i < end; i++) {
+    let linkElement = document.createElement('a');
+    linkElement.href = images[i].largeImageURL;
 
-    // let img = results[i].previewURL;
-    // let img_element = document.createElement('')
-
-    img = `<img src="${images[i].previewURL}" alt="image"></img>`;
-    html += `<div>${img}</div>`;
-  }
-  if (html) {
-    imageContainer.innerHTML = html;
+    let elem = document.createElement('img');
+    // elem.setAttribute('src', images[i].largeImageURL);
+    elem.setAttribute("src", images[i].previewURL);
+    elem.setAttribute('alt', 'image');
+    imgThumbnail.appendChild(elem);
+    
     setUpPages(images.length);
-  }
-  else returnMsg.innerHTML = '<p>sorry, no images available...</p>';
-};
 
+    elem.addEventListener('click', (event) => {
+    modalElem.getElementsByClassName.display = 'block';
+      modalImage.src = linkElement.href;
+    // modalImage.src = event.target.src;
+    });
+    modalElem.onclick = function () {
+      // modalElem.append()
+      
+      document.querySelector('#modal').style.display = 'none';
+    }
+
+    // linkElement.appendChild(elem);
+    // imageContainer.appendChild(linkElement);
+
+    // document.querySelector(".close").addEventListener("click", () => {
+    //   modalElem.style.display = "none";
+    // });
+  }
+};
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -79,9 +86,9 @@ form.addEventListener('submit', async (event) => {
   if (input.value) {
     const endpoint = query + input.value;
     let response = await axios.get(endpoint);
+    debugger;
     images = response.data.hits;
-   
-    // debugger
+
     if (images) {
       displayResults(current_page);
     }
