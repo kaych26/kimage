@@ -8,8 +8,8 @@ const input = document.querySelector('#user-input');
 const returnMsg = document.querySelector('#return-msg');
 const pageWrapper = document.querySelector('.page-button');
 const imgThumbnail = document.querySelector('.img-thumbnail');
-const modalElem = document.querySelector('#modal');
-const modalImage = document.querySelector('.modalImage');
+// const modalEle = document.querySelector('.modal');
+// const modalImage = document.querySelector('.modalImage');
 
 let current_page = 1;
 let image_per_page = 10;
@@ -41,6 +41,10 @@ const pageButtons = (page) => {
 };
 
 const displayResults = (page_idx) => {
+
+  let modalEle = document.querySelector('.modal');
+  let modalImage = document.querySelector('.modalImage');
+  
   imgThumbnail.innerHTML = '';
   page_idx -= 1;
 
@@ -48,34 +52,27 @@ const displayResults = (page_idx) => {
   let end = start + image_per_page;
   // debugger;
   for (let i = start; i < end; i++) {
+
     let linkElement = document.createElement('a');
     linkElement.href = images[i].largeImageURL;
 
     let elem = document.createElement('img');
-    // elem.setAttribute('src', images[i].largeImageURL);
+
     elem.setAttribute("src", images[i].previewURL);
     elem.setAttribute('alt', 'image');
+
     imgThumbnail.appendChild(elem);
     
     setUpPages(images.length);
 
-    elem.addEventListener('click', (event) => {
-    modalElem.getElementsByClassName.display = 'block';
+    elem.addEventListener("click", event => {
+      modalEle.style.display = "block";
       modalImage.src = linkElement.href;
-    // modalImage.src = event.target.src;
     });
-    modalElem.onclick = function () {
-      // modalElem.append()
-      
-      document.querySelector('#modal').style.display = 'none';
-    }
 
-    // linkElement.appendChild(elem);
-    // imageContainer.appendChild(linkElement);
-
-    // document.querySelector(".close").addEventListener("click", () => {
-    //   modalElem.style.display = "none";
-    // });
+    document.querySelector(".close").addEventListener("click", () => {
+      modalEle.style.display = "none";
+    });
   }
 };
 
