@@ -3,23 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
   <title>kImage</title>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script defer src="./src/main.js"></script>
   <link rel="stylesheet" type="text/css" media="screen" href="./src/main.css" />
 </head>
 <body>
+  <header>
+    <!-- <div class='header'>  -->
+      <img src="asset/Forbes_Logo.png" alt="Forbes" width="135px"/>
+      <p class='header-desc'>Engineering Coding Assignment - Kay Chan</p>
+    <!-- </div> -->
+
+  </header>
  
-  <h1>Enter image theme:  </h1>
+  <h1 class='title'>k-Image</h1>
   <form class='form-input'>
-    <input 
+    <input class='user-input'
       type='text'
       name='name'
       value=''
-      placeholder='paris, parks, beaches ...'
+      placeholder='word or theme ...'
       id='user-input'
       />
-      <button id='submit'>Submit</button>
+      <button id='submit'>Images</button>
 
   </form>
 
@@ -33,7 +41,7 @@
       <span class='close'>x</span>
       <img class='modalImage'  id='img01' />
     </div>
-    
+
   </section>
 
 </body>

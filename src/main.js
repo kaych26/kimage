@@ -50,24 +50,19 @@ const displayResults = (page_idx) => {
 
   let start = image_per_page * page_idx;
   let end = start + image_per_page;
-  // debugger;
+
   for (let i = start; i < end; i++) {
-
-    let linkElement = document.createElement('a');
-    linkElement.href = images[i].largeImageURL;
-
     let elem = document.createElement('img');
 
     elem.setAttribute("src", images[i].previewURL);
     elem.setAttribute('alt', 'image');
-
     imgThumbnail.appendChild(elem);
     
     setUpPages(images.length);
 
     elem.addEventListener("click", event => {
       modalEle.style.display = "block";
-      modalImage.src = linkElement.href;
+      modalImage.src = images[i].largeImageURL;
     });
 
     document.querySelector(".close").addEventListener("click", () => {
@@ -83,7 +78,7 @@ form.addEventListener('submit', async (event) => {
   if (input.value) {
     const endpoint = query + input.value;
     let response = await axios.get(endpoint);
-    debugger;
+
     images = response.data.hits;
 
     if (images) {
