@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Qwigley&family=Work+Sans:wght@400;600;800&display=swap" rel="stylesheet">
   <title>kImage</title>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script defer src="./src/main.js"></script>
@@ -12,33 +12,38 @@
 
 <body>
   <header>
-      <img src="asset/Forbes_Logo.png" alt="Forbes" width="135px"/>
-      <p class='header-desc'>Engineering Coding Assignment - Kay Chan</p>
+    <h1>k-Image </h1>
+    <h3>by Kay Chan</h3>
+    <!-- <p class='header-desc'>Engineering Coding Assignment - Kay Chan</p> -->
+
   </header>
  
-  <h1 class='title'>k-Image</h1>
+  <h1 class='title'>Stunning high quality images. </h1>
   
   <form class='form-input'>
-  <label>Select</label>
-  <select class="select" id="select">
-    <option value = "40">40</option>
-    <option value = "60" selected="selected">60</option>
-    <option value = "80">80</option>
-    <option value = "100">100</option>
-  </select>
-  
+    <label>Select</label>
+    <select class="select" id="select">
+      <option value = "40">40</option>
+      <option value = "60" selected="selected">60</option>
+      <option value = "80">80</option>
+      <option value = "100">100</option>
+    </select>
+    
     <input class='user-input'
       type='text'
       name='name'
       value=''
-      placeholder='word or theme ...'
+      placeholder='Search images ...'
       id='user-input'
-      />
-      <button id='submit'>Images</button>
-      <p id='return-msg'></p>
+    />
+    <button id='submit'>Images</button>
+    <p class='popular'>
+      Popular Images: 
+    </p>
+    <p id='return-msg'></p>
   </form>
-
-
+  
+  
   <section class='image-list'>
     <div class='img-thumbnail'></div>
     <div class='page-button'></div>
@@ -48,7 +53,6 @@
     <span class='close'>x</span>
     <img class='modalImage'  id='img01' />
   </div>
-
 
 </body>
 </html>

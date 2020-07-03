@@ -7,11 +7,15 @@ const returnMsg = document.querySelector('#return-msg');
 const pageWrapper = document.querySelector('.page-button');
 const imgThumbnail = document.querySelector('.img-thumbnail');
 const select= document.querySelector('.select');
-// const modalEle = document.querySelector('.modal');
-// const modalImage = document.querySelector('.modalImage');
+const modalEle = document.querySelector('.modal');
+const modalImage = document.querySelector('.modalImage');
+const popularEle = document.querySelector('.popular');
+const aSearch1 = document.querySelector('#a-search1');
+
+const image_per_page = 10;
 let current_page = 1;
-let image_per_page = 10;
 let images = '';
+const popularArr = ['nature', 'food', 'beach', 'flower', 'animal', 'car'];
 
 const setUpPages = (total_img) => {
   pageWrapper.innerHTML = '';
@@ -39,10 +43,6 @@ const pageButtons = (page) => {
 };
 
 const displayResults = (page_idx) => {
-  
-  let modalEle = document.querySelector('.modal');
-  let modalImage = document.querySelector('.modalImage');
-  
   imgThumbnail.innerHTML = '';
   page_idx -= 1;
   
@@ -59,6 +59,7 @@ const displayResults = (page_idx) => {
     setUpPages(images.length);
     
     elem.addEventListener("click", event => {
+      event.preventDefault();
       modalEle.style.display = "block";
       modalImage.src = images[i].largeImageURL;
     });
@@ -68,6 +69,29 @@ const displayResults = (page_idx) => {
     });
   }
 };
+
+const popularSearch = () => {
+  for (let i = 0; i < popularArr.length; i++) {
+    let elem = document.createElement('a');
+    elem.setAttribute('href', '#');
+    elem.innerText = `${popularArr[i]} `;
+    popularEle.appendChild(elem);
+
+    elem.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const endpoint = query + "&per_page="+ select.value + "&q="+ popularArr[i];
+      let response = await axios.get(endpoint);
+      
+      images = response.data.hits;
+      
+      if (images) 
+        displayResults(current_page);
+      
+    });
+  }
+}
+
+popularSearch();
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -80,9 +104,9 @@ form.addEventListener('submit', async (event) => {
     
     images = response.data.hits;
     
-    if (images) {
+    if (images) 
       displayResults(current_page);
-    }
+  
   } else {
     returnMsg.innerHTML = 'No image ...';
   }

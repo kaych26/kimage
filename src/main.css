@@ -10,33 +10,73 @@ body {
 }
 
 header {
-  height: 55px;
-  background: #181716;
+  height: 88px;
+  background: #333333;
   display: flex;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: space-between;
-  /* flex-direction: row; */
+  justify-content: left;
+}
+header h1 {
+  color: #8AEAE2;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #fff, 0 -1px #fff;
+  letter-spacing: .1em;
+  padding-left: 1.3rem;
+  /* transform: rotate(-2deg); */
+  /* outline: 1px solid red; */
+  
+}
+header h3 {
+  color: #FCFCFC;
+  font-family: 'Qwigley', cursive;;
+  font-size: 2rem;
+  letter-spacing: .1em;
+  padding: 0.2em 0 0 .5em;
+  transform: rotate(-.5deg);
 }
 
 .header-desc {
   color: #8AEAE2;
   padding: 0 20px;
 }
+.popular {
+  color: #333333;
+  padding-top: .8rem;
+  font-weight: 600;
+}
+
+.popular a {
+  text-decoration: none;
+  color: #333333;
+}
 
 .title {
-  color: #00808A;
+  color: #665C96;
+  /* color: #00808A; */
   font-family: 'Work Sans', sans-serif;
+  font-size: 1.8rem;
   text-align: center;
-  padding: 2rem 0 2rem 0;
-  /* font-family: 'Merriweather', serif; */
+  padding: 2rem 0 1.5rem 0;
 }
 
 .form-input {
   text-align: center;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
+
+.form-input label {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+}
+
+.form-input select {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  padding: .4rem;
+}
+
 .user-input {
-  padding: .4rem 4rem;
+  padding: .4rem 3rem;
   text-align: center;
 }
 
@@ -55,15 +95,13 @@ header {
 
 .page-button {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
+
 .page-button button {
   width: 2rem;
   height: 1.6rem;
-
   appearance: none;
   border: none;
   outline: none;
@@ -83,12 +121,15 @@ header {
 }
 
 .img-thumbnail {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  justify-items: center;
-  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   cursor: pointer;
-  transition: 0.1s;
+  /* transition: 0.2s; */
+}
+
+.img-thumbnail img {
+  padding: 1.2rem;
 }
 
 .img-thumbnail img:hover {
@@ -128,33 +169,4 @@ header {
 .close:focus {
   color: #8AEAE2;
   cursor: pointer;
-}
-
-@media all and (max-width: 850px) {
-  .img-thumbnail {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
-@media all and (max-width: 700px) {
-  .header-desc {
-    font-size: .9rem;
-    padding: 0 20px;
-  }
-  .img-thumbnail {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media all and (max-width: 500px) {
-  .header-desc {
-    font-size: .7rem;
-    padding: 0 20px;
-  }
-  .title {
-    font-size: 2rem;
-    padding: 2rem 0 2rem 0;
-  }
-  .img-thumbnail {
-  grid-template-columns: 1fr 1fr;
-  }
-
 }

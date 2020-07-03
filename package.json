@@ -4,7 +4,7 @@
   "description": "# OVERVIEW",
   "main": "index.js",
   "scripts": {
-    "start": "open index.html",
+    "start": "http-server -p 3000 -o / .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +18,9 @@
     "url": "https://github.com/kaych26/kimage/issues"
   },
   "homepage": "https://github.com/kaych26/kimage#readme",
-  "dependencies": {},
+  "dependencies": {
+    "http-server": "^0.12.3"
+  },
   "devDependencies": {
     "live-server": "^1.2.1"
   }
