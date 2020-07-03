@@ -1,7 +1,14 @@
+/* 
+  main.js => Recieving impage from Pixabay API based on 
+  user input word or theme  
+*/
+
+/*----------------------------------------------------------/
+  Global variables
+/----------------------------------------------------------*/
 const KEY = '17293224-4fce193fa3ddcc5b64747d858';
 const query = `https://pixabay.com/api/?key=${KEY}&image_type=photo`;
 
-// ------------------------------------------------------------/
 const form = document.querySelector('.form-input');
 const input = document.querySelector('#user-input');
 const returnMsg = document.querySelector('#return-msg');
@@ -11,17 +18,15 @@ const select= document.querySelector('.select');
 const modalEle = document.querySelector('.modal');
 const modalImage = document.querySelector('.modalImage');
 const popularEle = document.querySelector('.popular');
-const aSearch1 = document.querySelector('#a-search1');
 
-// ------------------------------------------------------------/
-const image_per_page = 10;
+const image_per_page = 10; // # of pages per display
 let current_page = 1;
 let images = '';
 const popularArr = ['nature', 'food', 'beach', 'flower', 'animal', 'car'];
 
-// ------------------------------------------------------------/
-// setUpPages => calculate the buttons needed for pagination.
-// ------------------------------------------------------------/
+/*----------------------------------------------------------/
+  setUpPages => calculate the buttons needed for pagination.
+-----------------------------------------------------------*/
 
 const setUpPages = (total_img) => {
   pageWrapper.innerHTML = '';
@@ -34,16 +39,16 @@ const setUpPages = (total_img) => {
   }
 };
 
-// ------------------------------------------------------------/
-// pageButtons => create buttons for pagination.
-// ------------------------------------------------------------/
+/*----------------------------------------------------------/
+  pageButtons => create buttons for pagination.
+-----------------------------------------------------------*/
 const pageButtons = (page) => {
   let button = document.createElement('button');
   button.innerText = page;
   
   if (current_page == page) button.classList.add('active');
   
-  button.addEventListener('click', function () {
+  button.addEventListener('click', ()=>{
     current_page = page;
     displayResults(current_page);
   });
@@ -51,10 +56,10 @@ const pageButtons = (page) => {
   return button;
 };
 
-// ------------------------------------------------------------/
-// displayResults => display the thumbnails and setting 
-// modal using the large image.
-// ------------------------------------------------------------/
+/* ----------------------------------------------------------/
+  displayResults => display the thumbnails and setting modal 
+  using the large image.
+------------------------------------------------------------*/
 
 const displayResults = (page_idx) => {
   imgThumbnail.innerHTML = '';
@@ -70,24 +75,27 @@ const displayResults = (page_idx) => {
     elem.setAttribute('alt', 'image');
     imgThumbnail.appendChild(elem);
     
+    // calculate and create buttons for pagination
     setUpPages(images.length);
     
+    // display modal using the large image
     elem.addEventListener("click", event => {
       event.preventDefault();
       modalEle.style.display = "block";
       modalImage.src = images[i].largeImageURL;
     });
     
+    // close modal
     document.querySelector(".close").addEventListener("click", () => {
       modalEle.style.display = "none";
     });
   }
 };
 
-// ------------------------------------------------------------/
-// popularSearch => To allow user to click on the popular 
-// key words to generate the image gallery
-// ------------------------------------------------------------/
+/* ----------------------------------------------------------/
+  popularSearch => To allow user to click on the popular 
+  key words to generate the image gallery
+------------------------------------------------------------*/
 
 const popularSearch = () => {
   for (let i = 0; i < popularArr.length; i++) {
@@ -95,7 +103,8 @@ const popularSearch = () => {
     elem.setAttribute('href', '#');
     elem.innerText = `${popularArr[i]} `;
     popularEle.appendChild(elem);
-
+    
+    // user clicked the popular key word
     elem.addEventListener('click', async (event) => {
       event.preventDefault();
       const endpoint = query + "&per_page="+ select.value + "&q="+ popularArr[i];
@@ -109,19 +118,19 @@ const popularSearch = () => {
   }
 }
 
-// ------------------------------------------------------------/
-//   Main
-// 
-// ------------------------------------------------------------/
+/*----------------------------------------------------------/
+  Main
+-----------------------------------------------------------*/
 
+// Populate the popular key words for user to click
 popularSearch();
 
+// Form event to retrieve image based on user input
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   returnMsg.innerHTML = '';
   
   if (input.value) {
-
     const endpoint = query + "&per_page="+ select.value + "&q="+ input.value;
     let response = await axios.get(endpoint);
     
