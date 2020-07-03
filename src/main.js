@@ -1,6 +1,7 @@
 const KEY = '17293224-4fce193fa3ddcc5b64747d858';
 const query = `https://pixabay.com/api/?key=${KEY}&image_type=photo`;
 
+// ------------------------------------------------------------/
 const form = document.querySelector('.form-input');
 const input = document.querySelector('#user-input');
 const returnMsg = document.querySelector('#return-msg');
@@ -12,10 +13,15 @@ const modalImage = document.querySelector('.modalImage');
 const popularEle = document.querySelector('.popular');
 const aSearch1 = document.querySelector('#a-search1');
 
+// ------------------------------------------------------------/
 const image_per_page = 10;
 let current_page = 1;
 let images = '';
 const popularArr = ['nature', 'food', 'beach', 'flower', 'animal', 'car'];
+
+// ------------------------------------------------------------/
+// setUpPages => calculate the buttons needed for pagination.
+// ------------------------------------------------------------/
 
 const setUpPages = (total_img) => {
   pageWrapper.innerHTML = '';
@@ -28,6 +34,9 @@ const setUpPages = (total_img) => {
   }
 };
 
+// ------------------------------------------------------------/
+// pageButtons => create buttons for pagination.
+// ------------------------------------------------------------/
 const pageButtons = (page) => {
   let button = document.createElement('button');
   button.innerText = page;
@@ -41,6 +50,11 @@ const pageButtons = (page) => {
   
   return button;
 };
+
+// ------------------------------------------------------------/
+// displayResults => display the thumbnails and setting 
+// modal using the large image.
+// ------------------------------------------------------------/
 
 const displayResults = (page_idx) => {
   imgThumbnail.innerHTML = '';
@@ -70,6 +84,11 @@ const displayResults = (page_idx) => {
   }
 };
 
+// ------------------------------------------------------------/
+// popularSearch => To allow user to click on the popular 
+// key words to generate the image gallery
+// ------------------------------------------------------------/
+
 const popularSearch = () => {
   for (let i = 0; i < popularArr.length; i++) {
     let elem = document.createElement('a');
@@ -86,10 +105,14 @@ const popularSearch = () => {
       
       if (images) 
         displayResults(current_page);
-      
     });
   }
 }
+
+// ------------------------------------------------------------/
+//   Main
+// 
+// ------------------------------------------------------------/
 
 popularSearch();
 
