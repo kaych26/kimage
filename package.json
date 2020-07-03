@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server -p 3000 -o / .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,12 @@
   },
   "homepage": "https://github.com/kaych26/kimage#readme",
   "dependencies": {
-    "http-server": "^0.12.3"
+    "axios": "^0.19.2",
+    "http-server": "^0.12.3",
+    "jest-cli": "^26.1.0"
   },
   "devDependencies": {
+    "jest": "^26.1.0",
     "live-server": "^1.2.1"
   }
 }

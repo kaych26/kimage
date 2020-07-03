@@ -1,6 +1,6 @@
 /* 
-  main.js => Recieving impage from Pixabay API based on 
-  user input word or theme  
+  main.js => Get images from Pixabay API based on 
+  user input or selected word.  
 */
 
 /*----------------------------------------------------------/
@@ -19,22 +19,30 @@ const modalEle = document.querySelector('.modal');
 const modalImage = document.querySelector('.modalImage');
 const popularEle = document.querySelector('.popular');
 
-const image_per_page = 10;
+const IMG_PER_PAGE = 10;
 let current_page = 1;
 
 /*----------------------------------------------------------/
-setUpPages => calculate the buttons needed for pagination.
+calcTotalPages => calc total nubmer of pages
 -----------------------------------------------------------*/
+const calcTotalPages = (length) => {
+  return Math.ceil(length / IMG_PER_PAGE);
+}
 
-const setUpPages = (images) => {
+/*----------------------------------------------------------/
+setPageNumbers => calculate the buttons needed for pagination.
+-----------------------------------------------------------*/
+const setPageNumbers = (images) => {
   pageWrapper.innerHTML = '';
-  let pages = Math.ceil(images.length / image_per_page);
+  const tot_pages = calcTotalPages(images.length);
 
-  for (let page = 1; page <= pages; page++) {
+  for (let page = 1; page <= tot_pages; page++) {
+
     let button = document.createElement('button');
     button.innerText = page;
 
-    if (current_page == page) button.classList.add('active');
+    if (current_page == page)
+      button.classList.add('active');
 
     button.addEventListener('click', (event) => {
       event.preventDefault();
@@ -60,8 +68,8 @@ const displayResults = (page_idx, images) => {
   imgThumbnail.innerHTML = '';
   page_idx -= 1;
 
-  let start = image_per_page * page_idx;
-  let end = start + image_per_page;
+  let start = IMG_PER_PAGE * page_idx;
+  let end = start + IMG_PER_PAGE;
 
   for (let i = start; i < end; i++) {
     let elem = document.createElement('img');
@@ -95,23 +103,28 @@ const getImages = async (word) => {
 
   if (images.length > 0) {
     displayResults(current_page, images);
-    setUpPages(images);
-  } else returnMsg.innerHTML = 'No image available.';
+    setPageNumbers(images);
+  }
+  else returnMsg.innerHTML = 'No image available.';
+ 
 };
 
 /* ----------------------------------------------------------/
-  popularSearch => Set up popular word list and generate the
+  popularImages => Set up popular word list and generate the
   image result when user clicks it.
 ------------------------------------------------------------*/
 const popularImages = () => {
   const popularArr = ['nature', 'food', 'beach', 'flower', 'animal', 'car'];
+
   for (let i = 0; i < popularArr.length; i++) {
     let elem = document.createElement('a');
     elem.setAttribute('href', '#');
     elem.innerText = `${popularArr[i]} `;
-    popularEle.appendChild(elem);
 
-    // user clicked the popular key word
+    if (popularEle)
+      popularEle.appendChild(elem);
+
+    // add onclick for popular key word
     elem.addEventListener('click', async (event) => {
       event.preventDefault();
       getImages(popularArr[i]);
@@ -123,23 +136,26 @@ const popularImages = () => {
   handleUserInput => user input
 -----------------------------------------------------------*/
 const handleUserInput = () => {
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-  
-    // user input
-    if (input.value) getImages(input.value);
-    // blank user input
-    else returnMsg.innerHTML = 'Enter a search or select popular list.';
-  });
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      // user input
+      if (input.value) getImages(input.value);
+      // blank user input
+      else returnMsg.innerHTML = 'Enter a search or select popular list.';
+    });
+  }
 }
 
 /*----------------------------------------------------------/
   Main
 -----------------------------------------------------------*/
-
 // Set up the popular key words for user to click
 popularImages();
 
 // user input field
 handleUserInput();
+
+// module.exports = { calcTotalPages };
+
