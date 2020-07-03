@@ -10,21 +10,20 @@ body {
 }
 
 header {
-  height: 88px;
+  height: 60px;
   background: #333333;
   display: flex;
   align-items: center;
   justify-content: left;
 }
+
 header h1 {
   color: #8AEAE2;
   text-shadow: -1px 0 #000, 0 2px #000, 1px 0 #fff, 0 -1px #fff;
   letter-spacing: .1em;
   padding-left: 1.3rem;
-  /* transform: rotate(-2deg); */
-  /* outline: 1px solid red; */
-  
 }
+
 header h3 {
   color: #FCFCFC;
   font-family: 'Qwigley', cursive;;
@@ -42,11 +41,13 @@ header h3 {
   color: #333333;
   padding-top: .8rem;
   font-weight: 600;
+  color: #665C96
 }
 
 .popular a {
   text-decoration: none;
   color: #333333;
+  font-weight: 400;
 }
 
 .popular a:hover {
@@ -121,6 +122,9 @@ header h3 {
 .page-button button.active {
   background-color: #8AEAE2;
   box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+}
+.page-button button.inactive {
+  background-color: #BBBBBB;
 }
 
 .img-thumbnail {
