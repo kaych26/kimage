@@ -30,12 +30,14 @@ Tool used: Jest
 
 # DESIGN
 - The application is built using JavaScript, HTML and CSS. 
-- The Pixabay API is connected to retrieve images.
-- User enters word or use popular key word to retrieve the images.
-- A selection of 40, 60, 80 or 100 images to retrieve.
-- The image is displayed 10 per page, buttons are created for user to switch to different page.
-- The large image is displayed in the modal.
+- The 'Pixabay API' is connected to retrieve images.
+- User enters word or select highlighted word to retrieve images.
+- Each API call retrieves 50 images.
+- Display 10 thumbnails per page - 5 buttons or less (if less images) 'Prev' and 'Next' buttons to trigger the next or prev 50 images.
+- Current button is highlighted.
+- When user clicks on thumbnail, modal with large image is displayed. 'X' to close modal.
 - The image is displayed using 'flex' css and reponsive as the screen width shrinks.
+
 
 ## Files:
   ./index.hmtl  </br>
@@ -45,10 +47,12 @@ Tool used: Jest
 ### Jest Test files
   ./src/main.test.js
 
+## Constraint 
+- 'Next' buttons allows 5xs only.  Need more error handling when images max out.
+
 # POST MVP
-- Add to display the button in group of 5 if the number of pages increases.
 - Add the next option to display the next image on the modal screen.
-- Add filter image by categories option (background, sports, business, etc. )
+- Add filter image by categories option (background, sports, business, etc.
 - Add fitler image by color.
 - Build image slide show option.
 
