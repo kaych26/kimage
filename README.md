@@ -12,7 +12,8 @@ Kay Chan
 
 # RUN the App
 ## Execute:
-On the root directory => npm i && start
+On the root directory
+  - npm i && start
 
 ## Note:
   - npm i will install dependencies:  
@@ -37,8 +38,8 @@ Tool used: Jest
 - The image is displayed using 'flex' css and reponsive as the screen width shrinks.
 
 ## Files:
-  index.hmtl  
-  ./src/main.js
+  index.hmtl  </br>
+  ./src/main.js </br>
   ./src/main.css
 
 ### Jest Test files
