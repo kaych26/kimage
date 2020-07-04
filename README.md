@@ -33,7 +33,8 @@ Tool used: Jest
 - The 'Pixabay API' is connected to retrieve images.
 - User enters word or select highlighted word to retrieve images.
 - Each API call retrieves 50 images.
-- Display 10 thumbnails per page - 5 buttons or less (if less images) 'Prev' and 'Next' buttons to trigger the next or prev 50 images.
+- Display 10 thumbnails per page - 5 buttons or less (if less images) .
+- The'Prev' and 'Next' buttons to retrieve the next or prev 50 images (up to 50 pages, 500 images).
 - Current button is highlighted.
 - When user clicks on thumbnail, modal with large image is displayed. 'X' to close modal.
 - The image is displayed using 'flex' css and reponsive as the screen width shrinks.
@@ -46,9 +47,6 @@ Tool used: Jest
 
 ### Jest Test files
   ./src/main.test.js
-
-## Constraint 
-- 'Next' buttons allows 5xs only.  Need more error handling when images max out.
 
 # POST MVP
 - Add the next option to display the next image on the modal screen.

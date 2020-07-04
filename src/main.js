@@ -21,11 +21,11 @@ const modalClose = document.querySelector('.close');
 
 const IMG_PER_PAGE = 10;
 const IMG_TO_GET = 50;
-const MAX_NEXT = 5;
+const MAX_NEXT = 10;
 const MAX_BTN = IMG_TO_GET / IMG_PER_PAGE;
 
 let more_img = true;
-let current_set = 0;
+let current_set = 1;
 let subject = '';
 
 /*----------------------------------------------------------/
@@ -42,30 +42,36 @@ const calcTotalPages = (length) => {
 }
 
 /*----------------------------------------------------------/
-  setButtonEvent => highlight new page number and display 
-  images for selected page.
+calcArrIdx => calc the idx to display 10 images
+-----------------------------------------------------------*/
+const calcArrIdx = (page) => {
+  return ((page-1) % MAX_BTN) * IMG_PER_PAGE;
+}
+
+/*----------------------------------------------------------/
+setButtonEvent => highlight selected page btn & display images
 -----------------------------------------------------------*/
 const setButtonEvent = (button, images) => {
 
   button.addEventListener('click', (event) => {
     event.preventDefault();
+
     let prevPage = document.querySelector('.page-button button.active');
     prevPage.classList.remove('active');
-
-    const current_page = button.innerText;
     button.classList.add('active');
 
+    const idx = calcArrIdx(button.innerText);
+    // const current_page = button.innerText;
+
     // display images for page
-    let idx = current_page - (current_set * MAX_BTN) - 1;
+    // let start_idx = (current_page -1) * IMG_PER_PAGE;
     let imgs = images.slice(idx, idx + IMG_PER_PAGE);
     displayResults(imgs);
-   
   });
 }
 
 /*----------------------------------------------------------/
-  setNextButton => create the "Next" button to retrieve 
-  next 50 images
+setNextButton => create "Next" btn to retrieve next 50 images
 -----------------------------------------------------------*/
 
 const setNextButton = () => {
@@ -82,8 +88,7 @@ const setNextButton = () => {
 }
 
 /*----------------------------------------------------------/
-  setPrevtButton => create the "Prev" button to retrieve 
-  the previous 50 images
+setPrevtButton => create "Prev" button for prev 50 images
 -----------------------------------------------------------*/
 
 const setPrevButton = () => {
@@ -105,14 +110,14 @@ setPageNumbers => set up pagination
 const setPageNumbers = (images) => {
 
   pageWrapper.innerHTML = '';
-  let first_page = (current_set * MAX_BTN) + 1;
+  let first_page = ((current_set-1) * MAX_BTN) + 1;
   let pageNum = first_page;
 
   // use image array to calc total pages incase result is less.
   let tot_pages = calcTotalPages(images.length);
   
   // create Prev button
-  current_set > 0 && setPrevButton();
+  current_set > 1 && setPrevButton();
 
   while (tot_pages--) {
     let button = document.createElement('button');
@@ -127,12 +132,13 @@ const setPageNumbers = (images) => {
     setButtonEvent(button, images);
   }
   // create Next button if more images
-  more_img && setNextButton();
+  if (more_img && current_set < MAX_NEXT)
+    setNextButton();
 };
 
 
 /* ----------------------------------------------------------/
-displayResults => display the thumbnails and set up modal
+displayResults => display thumbnail imgs and set up modal
 ------------------------------------------------------------*/
 const displayResults = (imgs) => {
   returnMsg.innerHTML = '';
@@ -158,7 +164,7 @@ const displayResults = (imgs) => {
 ------------------------------------------------------------*/
 const getImages = async (word) => {
 
-  const api_page = current_set + 1;
+  const api_page = current_set;
   const endpoint = query + '&page=' + api_page + '&per_page=' + IMG_TO_GET + '&q=' + word;
 
   let response = await axios.get(endpoint);
@@ -207,7 +213,7 @@ const handleUserInput = () => {
       // reset;
       returnMsg.innerHTML = '';
       imgThumbnail.innerHTML = '';
-      current_set = 0;
+      current_set = 1;
       
       if (input.value) {
         subject = input.value;
