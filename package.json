@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/kaych26/kimage#readme",
   "dependencies": {
-    "axios": "^0.19.2",
     "http-server": "^0.12.3",
     "jest-cli": "^26.1.0"
   },
