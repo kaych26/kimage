@@ -60,12 +60,9 @@ const setButtonEvent = (button, images) => {
     prevPage.classList.remove('active');
     button.classList.add('active');
 
+    // display images for selected page
     const idx = calcArrIdx(button.innerText);
-    // const current_page = button.innerText;
-
-    // display images for page
-    // let start_idx = (current_page -1) * IMG_PER_PAGE;
-    let imgs = images.slice(idx, idx + IMG_PER_PAGE);
+    const imgs = images.slice(idx, idx + IMG_PER_PAGE);
     displayResults(imgs);
   });
 }
@@ -90,7 +87,6 @@ const setNextButton = () => {
 /*----------------------------------------------------------/
 setPrevtButton => create "Prev" button for prev 50 images
 -----------------------------------------------------------*/
-
 const setPrevButton = () => {
   let nextBtn = document.createElement('button');
   nextBtn.innerText = 'Prev';
@@ -252,4 +248,4 @@ closeModal();
 /*----------------------------------------------------------/
   Jest Unit testing export, uncomment below to run 'jest'
 -----------------------------------------------------------*/
-// module.exports = { calcTotalPages };
+// export { calcTotalPages, calcArrIdx};

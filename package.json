@@ -23,6 +23,8 @@
     "jest-cli": "^26.1.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
     "jest": "^26.1.0",
     "live-server": "^1.2.1"
   }

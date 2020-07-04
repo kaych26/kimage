@@ -25,8 +25,9 @@ npm start => runs the app on http-server using port 3000
 ## Unit Testing:
 Tool used: Jest
 
-- On the root directory, uncommnet the last line (module.exports) on main.js file.  The module is not recognized when js is run on webiste. Further research is needed to handle the module.export. 
-- On the command line, run 'npm test'
+- At root directory: In 'main.js', uncommnet the last line (exports).  The export is commented out to run js website. Further research is needed to handle the export.
+
+- At root directory -> run 'npm test'
 
 # DESIGN
 - The application is built using JavaScript, HTML and CSS. 
@@ -38,7 +39,6 @@ Tool used: Jest
 - Current button is highlighted.
 - When user clicks on thumbnail, modal with large image is displayed. 'X' to close modal.
 - The image is displayed using 'flex' css and reponsive as the screen width shrinks.
-
 
 ## Files:
   ./index.hmtl  </br>
