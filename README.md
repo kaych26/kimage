@@ -38,12 +38,19 @@ Tool used: Jest
 - The image is displayed using 'flex' css and reponsive as the screen width shrinks.
 
 ## Files:
-  index.hmtl  </br>
+  ./index.hmtl  </br>
   ./src/main.js </br>
   ./src/main.css
 
 ### Jest Test files
   ./src/main.test.js
+
+# POST MVP
+- Add to display the button in group of 5 if the number of pages increases.
+- Add the next option to display the next image on the modal screen.
+- Add filter image by categories option (background, sports, business, etc. )
+- Add fitler image by color.
+- Build image slide show option.
 
 ## Wireframes
 ![kImage Wireframe Design](./asset/kImage.png)
