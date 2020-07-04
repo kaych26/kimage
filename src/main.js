@@ -132,7 +132,6 @@ const setPageNumbers = (images) => {
     setNextButton();
 };
 
-
 /* ----------------------------------------------------------/
 displayResults => display thumbnail imgs and set up modal
 ------------------------------------------------------------*/

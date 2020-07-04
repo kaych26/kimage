@@ -49,6 +49,7 @@ Tool used: Jest
   ./src/main.test.js
 
 # POST MVP
+- Make a cover page.
 - Add the next option to display the next image on the modal screen.
 - Add filter image by categories option (background, sports, business, etc.
 - Add fitler image by color.
