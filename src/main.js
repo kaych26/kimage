@@ -15,9 +15,11 @@ const returnMsg = document.querySelector('#return-msg');
 const pageWrapper = document.querySelector('.page-button');
 const imgThumbnail = document.querySelector('.img-thumbnail');
 const select = document.querySelector('.select');
+const popularEle = document.querySelector('.popular');
 const modalEle = document.querySelector('.modal');
 const modalImage = document.querySelector('.modalImage');
-const popularEle = document.querySelector('.popular');
+const modalClose = document.querySelector('.close');
+
 
 const IMG_PER_PAGE = 10;
 let current_page = 1;
@@ -157,9 +159,11 @@ const handleUserInput = () => {
   closeModal
 -----------------------------------------------------------*/
 const closeModal = () => {
-  document.querySelector('.close').addEventListener('click', () => {
-    modalEle.style.display = 'none';
-  });
+  if (modalClose)
+    modalClose.addEventListener('click', (event) => {
+      event.preventDefault();
+      modalEle.style.display = 'none';
+    });
 }
 
 /*----------------------------------------------------------/
