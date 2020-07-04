@@ -33,10 +33,6 @@ header h3 {
   transform: rotate(-.5deg);
 }
 
-.header-desc {
-  color: #8AEAE2;
-  padding: 0 20px;
-}
 .popular {
   color: #333333;
   padding-top: .8rem;
@@ -73,14 +69,8 @@ header h3 {
   font-size: 12px;
 }
 
-.form-input select {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 12px;
-  padding: .4rem;
-}
-
 .user-input {
-  padding: .4rem 3rem;
+  padding: .4rem 10rem;
   text-align: center;
 }
 

@@ -14,129 +14,186 @@ const input = document.querySelector('#user-input');
 const returnMsg = document.querySelector('#return-msg');
 const pageWrapper = document.querySelector('.page-button');
 const imgThumbnail = document.querySelector('.img-thumbnail');
-const select = document.querySelector('.select');
 const popularEle = document.querySelector('.popular');
 const modalEle = document.querySelector('.modal');
 const modalImage = document.querySelector('.modalImage');
 const modalClose = document.querySelector('.close');
 
-
 const IMG_PER_PAGE = 10;
-let current_page = 1;
+const IMG_TO_GET = 50;
+const MAX_NEXT = 5;
+const MAX_BTN = IMG_TO_GET / IMG_PER_PAGE;
+
+let more_img = true;
+let current_set = 0;
+let subject = '';
 
 /*----------------------------------------------------------/
 calcTotalPages => calc total nubmer of pages
 -----------------------------------------------------------*/
 const calcTotalPages = (length) => {
-  return Math.ceil(length / IMG_PER_PAGE);
+  const pages = Math.ceil(length / IMG_PER_PAGE);
+
+  // no more img to retrieve -> not to display Next btn.
+  if (pages < MAX_BTN)
+    more_img = false;
+  
+  return pages;
 }
 
 /*----------------------------------------------------------/
   setButtonEvent => highlight new page number and display 
-  images for the selected page.
+  images for selected page.
 -----------------------------------------------------------*/
 const setButtonEvent = (button, images) => {
+
   button.addEventListener('click', (event) => {
     event.preventDefault();
     let prevPage = document.querySelector('.page-button button.active');
     prevPage.classList.remove('active');
 
-    current_page = button.innerText;
+    const current_page = button.innerText;
     button.classList.add('active');
 
-    displayResults(current_page, images);
+    // display images for page
+    let idx = current_page - (current_set * MAX_BTN) - 1;
+    let imgs = images.slice(idx, idx + IMG_PER_PAGE);
+    displayResults(imgs);
+   
   });
 }
 
 /*----------------------------------------------------------/
-setPageNumbers => calculate the buttons needed for pagination.
+  setNextButton => create the "Next" button to retrieve 
+  next 50 images
+-----------------------------------------------------------*/
+
+const setNextButton = () => {
+  let nextBtn = document.createElement('button');
+  nextBtn.innerText = 'Next';
+  pageWrapper.appendChild(nextBtn);
+
+  nextBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    current_set += 1;
+    // get next 50 set of images
+    getImages(subject);
+  });
+}
+
+/*----------------------------------------------------------/
+  setPrevtButton => create the "Prev" button to retrieve 
+  the previous 50 images
+-----------------------------------------------------------*/
+
+const setPrevButton = () => {
+  let nextBtn = document.createElement('button');
+  nextBtn.innerText = 'Prev';
+  pageWrapper.appendChild(nextBtn);
+
+  nextBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    current_set -= 1;
+    // get prev 50 images
+    getImages(subject);
+  });
+}
+
+/*----------------------------------------------------------/
+setPageNumbers => set up pagination
 -----------------------------------------------------------*/
 const setPageNumbers = (images) => {
+
   pageWrapper.innerHTML = '';
-  const tot_pages = calcTotalPages(images.length);
+  let first_page = (current_set * MAX_BTN) + 1;
+  let pageNum = first_page;
 
-  for (let page = 1; page <= tot_pages; page++) {
+  // use image array to calc total pages incase result is less.
+  let tot_pages = calcTotalPages(images.length);
+  
+  // create Prev button
+  current_set > 0 && setPrevButton();
 
+  while (tot_pages--) {
     let button = document.createElement('button');
-    button.innerText = page;
 
     // highlight the current page button
-    if (current_page == page)
-      button.classList.add('active');
-    
+    pageNum == first_page && button.classList.add('active');
+
+    button.innerText = pageNum++;
     pageWrapper.appendChild(button);
 
-    // change page
+    // set listener for page change
     setButtonEvent(button, images);
   }
+  // create Next button if more images
+  more_img && setNextButton();
 };
 
+
 /* ----------------------------------------------------------/
-displayResults => display the thumbnails and setting modal 
-using the large image.
+displayResults => display the thumbnails and set up modal
 ------------------------------------------------------------*/
-const displayResults = (page_idx, images) => {
+const displayResults = (imgs) => {
   returnMsg.innerHTML = '';
   imgThumbnail.innerHTML = '';
-  page_idx -= 1;
 
-  let start = IMG_PER_PAGE * page_idx;
-  let end = start + IMG_PER_PAGE;
-
-  for (let i = start; i < end; i++) {
+  imgs.forEach((i) => {
     let elem = document.createElement('img');
 
-    elem.setAttribute('src', images[i].previewURL);
+    elem.setAttribute('src', i.previewURL);
     elem.setAttribute('alt', 'image');
     imgThumbnail.appendChild(elem);
 
-    // onclick to display modal using large image
     elem.addEventListener('click', (event) => {
       event.preventDefault();
       modalEle.style.display = 'block';
-      modalImage.src = images[i].largeImageURL;
+      modalImage.src = i.largeImageURL;
     });
-  }
+  });
 };
 
 /* ----------------------------------------------------------/
-  getImage => axios call to retrieve images
+  getImage => axios call to retrieve (IMG_TO_GET=50) images
 ------------------------------------------------------------*/
 const getImages = async (word) => {
-  const endpoint = query + '&per_page=' + select.value + '&q=' + word;
-  let response = await axios.get(endpoint);
 
+  const api_page = current_set + 1;
+  const endpoint = query + '&page=' + api_page + '&per_page=' + IMG_TO_GET + '&q=' + word;
+
+  let response = await axios.get(endpoint);
   const images = response.data.hits;
 
   if (images.length > 0) {
-    current_page = 1;
-    displayResults(current_page, images);
+    // initial display the first 10 images
+    let imgs = images.slice(0, IMG_PER_PAGE);
+    displayResults(imgs);
     setPageNumbers(images);
   }
   else returnMsg.innerHTML = 'No image available.';
 };
 
 /* ----------------------------------------------------------/
-  popularImages => Set up popular word list and generate the
-  image result when user clicks it.
+  popularImages => Set up popular word list to click.
 ------------------------------------------------------------*/
-const popularImages = () => {
-  const popularArr = ['nature', 'food', 'beach', 'flower', 'animal', 'car'];
+const popularWords = () => {
+  const popular = ['nature', 'food', 'beach', 'flower', 'animal', 'car'];
 
-  for (let i = 0; i < popularArr.length; i++) {
+  popular.forEach(word => {
     let elem = document.createElement('a');
     elem.setAttribute('href', '#');
-    elem.innerText = `${popularArr[i]} `;
+    elem.innerText = `${word} `;
 
     if (popularEle)
       popularEle.appendChild(elem);
-
+    
     // add onclick for popular key word
     elem.addEventListener('click', async (event) => {
       event.preventDefault();
-      getImages(popularArr[i]);
+      subject = word;
+      getImages(word);
     });
-  }
+  });
 };
 
 /*----------------------------------------------------------/
@@ -146,9 +203,16 @@ const handleUserInput = () => {
   if (form) {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+
+      // reset;
+      returnMsg.innerHTML = '';
+      imgThumbnail.innerHTML = '';
+      current_set = 0;
       
-      // user input
-      if (input.value) getImages(input.value);
+      if (input.value) {
+        subject = input.value;
+        getImages(input.value);
+      }
       // blank user input
       else returnMsg.innerHTML = 'Enter a search or select popular list.';
     });
@@ -170,17 +234,16 @@ const closeModal = () => {
   Main
 -----------------------------------------------------------*/
 
-// Set up the popular key words for user to click
-popularImages();
+// popular key words to click
+popularWords();
 
 // user input
 handleUserInput();
 
-// close modal event listener
+// listen to close modal
 closeModal();
 
 /*----------------------------------------------------------/
   Jest Unit testing export, uncomment below to run 'jest'
 -----------------------------------------------------------*/
 // module.exports = { calcTotalPages };
-
