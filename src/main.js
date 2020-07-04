@@ -30,6 +30,23 @@ const calcTotalPages = (length) => {
 }
 
 /*----------------------------------------------------------/
+  setButtonEvent => highlight new page number and display 
+  images for the selected page.
+-----------------------------------------------------------*/
+const setButtonEvent = (button, images) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    let prevPage = document.querySelector('.page-button button.active');
+    prevPage.classList.remove('active');
+
+    current_page = button.innerText;
+    button.classList.add('active');
+
+    displayResults(current_page, images);
+  });
+}
+
+/*----------------------------------------------------------/
 setPageNumbers => calculate the buttons needed for pagination.
 -----------------------------------------------------------*/
 const setPageNumbers = (images) => {
@@ -41,21 +58,14 @@ const setPageNumbers = (images) => {
     let button = document.createElement('button');
     button.innerText = page;
 
+    // highlight the current page button
     if (current_page == page)
       button.classList.add('active');
-
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      let prevPage = document.querySelector('.page-button button.active');
-      prevPage.classList.remove('active');
-
-      current_page = button.innerText;
-      button.classList.add('active');
-
-      displayResults(current_page, images);
-    });
-
+    
     pageWrapper.appendChild(button);
+
+    // change page
+    setButtonEvent(button, images);
   }
 };
 
@@ -78,16 +88,11 @@ const displayResults = (page_idx, images) => {
     elem.setAttribute('alt', 'image');
     imgThumbnail.appendChild(elem);
 
-    // display modal using the large image
+    // onclick to display modal using large image
     elem.addEventListener('click', (event) => {
       event.preventDefault();
       modalEle.style.display = 'block';
       modalImage.src = images[i].largeImageURL;
-    });
-
-    // close modal
-    document.querySelector('.close').addEventListener('click', () => {
-      modalEle.style.display = 'none';
     });
   }
 };
@@ -102,11 +107,11 @@ const getImages = async (word) => {
   const images = response.data.hits;
 
   if (images.length > 0) {
+    current_page = 1;
     displayResults(current_page, images);
     setPageNumbers(images);
   }
   else returnMsg.innerHTML = 'No image available.';
- 
 };
 
 /* ----------------------------------------------------------/
@@ -149,13 +154,29 @@ const handleUserInput = () => {
 }
 
 /*----------------------------------------------------------/
+  closeModal
+-----------------------------------------------------------*/
+const closeModal = () => {
+  document.querySelector('.close').addEventListener('click', () => {
+    modalEle.style.display = 'none';
+  });
+}
+
+/*----------------------------------------------------------/
   Main
 -----------------------------------------------------------*/
+
 // Set up the popular key words for user to click
 popularImages();
 
-// user input field
+// user input
 handleUserInput();
 
+// close modal event listener
+closeModal();
+
+/*----------------------------------------------------------/
+  Jest Unit testing export, uncomment below to run 'jest'
+-----------------------------------------------------------*/
 // module.exports = { calcTotalPages };
 
