@@ -29,6 +29,9 @@ Tool used: Jest
 
 - At root directory -> run 'npm test'
 
+## Wireframes
+![kImage Wireframe Design](./asset/kImage.png)
+
 # DESIGN
 - The application is built using JavaScript, HTML and CSS. 
 - The 'Pixabay API' is connected to retrieve images.
@@ -45,8 +48,25 @@ Tool used: Jest
   ./src/main.js </br>
   ./src/main.css
 
-### Jest Test files
+## Jest Test files
   ./src/main.test.js
+
+## Functions
+- popularWords() => Populate a list of popular words and retrieve the images when clicked
+- handleUserInput() => Execute the image retrieve based on user's input
+- reset() => Resets the initial variables back to original state when new input is requested
+- getImages() => Call pixabay API to retrieve the first 50 images
+- displayResults() => Read results and update DOM.  Display the first page of 10 image thumbnails. Create listener to display image modal if thumbnail is clicked.
+- setPageNumber() => Paginate the results, 10 images per page.  Display buttons for each page with current page highlighted.
+- setNextButton() => Create the next button to allow user to retrieve the next 50 images (upto 50th pages, total 500 images), will not display if max images are retrieved.
+- setPrevButton() => Similar to next button, it goes back to the previous 50 images, only displayed from page 6 and on. 
+- closeModal() => Event listener to close image modal.
+- setButtonEvent() => Event listener to diplay the images for selected page.
+- calcTotalPages() => Calculate total number of buttons. If images is less than 50, then fewer buttons.
+- calcArrIdx() => Calculate the index range of 10 images to reference from the response array.
+
+## Wireframes
+![kImage Diagram Flow Chart](./asset/kImage_diagram.png)
 
 # POST MVP
 - Make a cover page.
@@ -54,7 +74,4 @@ Tool used: Jest
 - Add filter image by categories option (background, sports, business, etc.
 - Add fitler image by color.
 - Build image slide show option.
-
-## Wireframes
-![kImage Wireframe Design](./asset/kImage.png)
 
