@@ -91,7 +91,7 @@ header h3 {
 }
 
 .image-list {
-  padding: 0 10rem 5rem 10rem;
+  padding: 0 12rem 5rem 12rem;
 }
 
 .img-thumbnail {
@@ -104,6 +104,9 @@ header h3 {
 
 .img-thumbnail img {
   padding: 1.2rem;
+  object-fit: cover;
+  width: 180px;
+  height: 180px;
 }
 
 .img-thumbnail img:hover {
@@ -113,7 +116,7 @@ header h3 {
 
 .page-button {
   position: fixed;
-  bottom: 2rem;
+  bottom: 1.3rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -187,24 +190,71 @@ header h3 {
 /*----- @MEDIA -----*/
 @media screen and (max-width: 1300px) {
   .image-list {
-    padding: 0 3rem;
+    padding: 0 7rem 3rem 7rem;
   }
 }
-
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1150px) {
   .image-list {
-    padding: 0;
+    padding: 0 3rem 3rem 3rem;
   }
-  .user-input {
-    padding: .4rem 6rem;
+  .img-thumbnail img {
+    padding: 1rem;
+    width: 170px;
+    height: 170px;
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 950px) {
+  .image-list {
+    padding: 0 1rem 3rem 1rem;
+  }
+  .img-thumbnail img {
+    padding: .8rem;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .image-list {
+    padding: 0 0 3rem 0;
+  }
+  .img-thumbnail img {
+    padding: .6rem;
+    width: 140px;
+    height: 140px;
+  }
   .title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }  
   .popular {
     font-size: .9rem;
+  }
+  .page-button {
+    bottom: 3rem;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  
+  .img-thumbnail img {
+    padding: .6rem;
+    width: 100px;
+    height: 100px;
+  }
+  .title {
+    font-size: 1.3rem;
+  }  
+  .popular {
+    font-size: .8rem;
+  }
+
+  .user-input {
+    padding: .4rem 6rem;
+    text-align: center;
+  } 
+
+  .page-button {
+    bottom: 5rem;
   }
 }
