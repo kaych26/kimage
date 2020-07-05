@@ -74,12 +74,14 @@ setNextButton => create "Next" btn to retrieve next 50 images
 const setNextButton = () => {
   let nextBtn = document.createElement('button');
   nextBtn.innerText = 'Next';
+  nextBtn.classList.add('next');
   pageWrapper.appendChild(nextBtn);
 
   nextBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    current_set += 1;
+
     // get next 50 set of images
+    current_set += 1;
     getImages(subject);
   });
 }
@@ -90,6 +92,7 @@ setPrevtButton => create "Prev" button for prev 50 images
 const setPrevButton = () => {
   let nextBtn = document.createElement('button');
   nextBtn.innerText = 'Prev';
+  nextBtn.classList.add('prev');
   pageWrapper.appendChild(nextBtn);
 
   nextBtn.addEventListener('click', (event) => {
@@ -181,6 +184,7 @@ const reset = () => {
   returnMsg.innerHTML = '';
   imgThumbnail.innerHTML = '';
   current_set = 1;
+  more_img = true;
 }
 
 /* ----------------------------------------------------------/
@@ -192,7 +196,8 @@ const popularWords = () => {
   popular.forEach(word => {
     let elem = document.createElement('a');
     elem.setAttribute('href', '#');
-    elem.innerText = `${word} `;
+    elem.classList.add('word');
+    elem.innerText = word;
 
     if (popularEle)
       popularEle.appendChild(elem);
@@ -216,7 +221,7 @@ const handleUserInput = () => {
       event.preventDefault();
 
       reset();
-      
+
       if (input.value) {
         subject = input.value;
         getImages(input.value);

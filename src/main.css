@@ -7,6 +7,8 @@
 
 body {
   background: #FCFCFC;
+  position: relative;
+  height: 100%;
 }
 
 header {
@@ -44,6 +46,8 @@ header h3 {
   text-decoration: none;
   color: #333333;
   font-weight: 400;
+  padding: 0 8px;
+  text-align: center;
 }
 
 .popular a:hover {
@@ -52,7 +56,6 @@ header h3 {
 
 .title {
   color: #665C96;
-  /* color: #00808A; */
   font-family: 'Work Sans', sans-serif;
   font-size: 1.8rem;
   text-align: center;
@@ -87,10 +90,33 @@ header h3 {
   color: #C41A23;
 }
 
+.image-list {
+  padding: 0 10rem 5rem 10rem;
+}
+
+.img-thumbnail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.img-thumbnail img {
+  padding: 1.2rem;
+}
+
+.img-thumbnail img:hover {
+  filter: grayscale(100%);
+  transform: scale(1.1);
+}
+
 .page-button {
+  position: fixed;
+  bottom: 2rem;
+  width: 100%;
   display: flex;
   justify-content: center;
-  padding-top: 1rem;
 }
 
 .page-button button {
@@ -109,30 +135,17 @@ header h3 {
 .page-button button:hover {
   background-color: #8AEAE2;
 }
+
 .page-button button.active {
   background-color: #8AEAE2;
   box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
 }
-.page-button button.inactive {
-  background-color: #BBBBBB;
-}
 
-.img-thumbnail {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  cursor: pointer;
-  /* transition: 0.2s; */
-}
-
-.img-thumbnail img {
-  padding: 1.2rem;
-  /* box-shadow: 5px 5px; */
-}
-
-.img-thumbnail img:hover {
-  filter: grayscale(100%);
-  transform: scale(1.1);
+.page-button button.prev,
+.page-button button.next {
+  background-color: #737373;
+  color: #fff;
+  width: 50px;
 }
 
 .modal {
@@ -148,6 +161,7 @@ header h3 {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.9);
 }
+
 .modalImage {
   margin: auto;
   display: block;
@@ -163,8 +177,34 @@ header h3 {
   font-weight: bold;
   transition: 0.3s;
 }
+
 .close:hover,
 .close:focus {
   color: #8AEAE2;
   cursor: pointer;
+}
+
+/*----- @MEDIA -----*/
+@media screen and (max-width: 1300px) {
+  .image-list {
+    padding: 0 3rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .image-list {
+    padding: 0;
+  }
+  .user-input {
+    padding: .4rem 6rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .title {
+    font-size: 1.6rem;
+  }  
+  .popular {
+    font-size: .9rem;
+  }
 }
