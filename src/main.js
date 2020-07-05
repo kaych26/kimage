@@ -175,6 +175,15 @@ const getImages = async (word) => {
 };
 
 /* ----------------------------------------------------------/
+ reset => reset screen 
+------------------------------------------------------------*/
+const reset = () => {
+  returnMsg.innerHTML = '';
+  imgThumbnail.innerHTML = '';
+  current_set = 1;
+}
+
+/* ----------------------------------------------------------/
   popularImages => Set up popular word list to click.
 ------------------------------------------------------------*/
 const popularWords = () => {
@@ -192,6 +201,7 @@ const popularWords = () => {
     elem.addEventListener('click', async (event) => {
       event.preventDefault();
       subject = word;
+      reset();
       getImages(word);
     });
   });
@@ -205,10 +215,7 @@ const handleUserInput = () => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      // reset;
-      returnMsg.innerHTML = '';
-      imgThumbnail.innerHTML = '';
-      current_set = 1;
+      reset();
       
       if (input.value) {
         subject = input.value;
