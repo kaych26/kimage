@@ -12,7 +12,7 @@ Kay Chan
 
 # RUN the App
 ## Execute:
-On the root directory
+On the root directory ./kimage
   - npm i && start
 
 ## Note:
@@ -25,9 +25,9 @@ npm start => runs the app on http-server using port 3000
 ## Unit Testing:
 Tool used: Jest
 
-- At root directory: In 'main.js', uncommnet the last line (exports).  The export is commented out to run js website. Further research is needed to handle the export.
+- In file ./kimage/src/main.js, uncommnet the last line (exports).  The export is commented out to run js website. Further research is needed to handle the export.
 
-- At root directory -> run 'npm test'
+- At root directory ./kimage -> run 'npm test'
 
 ## Wireframes
 ![kImage Wireframe Design](./asset/kImage.png)
