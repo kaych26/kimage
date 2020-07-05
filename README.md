@@ -66,7 +66,7 @@ Tool used: Jest
 - calcArrIdx() => Calculate the index range of 10 images to reference from the response array.
 
 ## Wireframes
-![kImage Diagram Flow Chart](./asset/kImage_diagram.png)
+![kImage](./asset/kImageFlowDiagram.png)
 
 # POST MVP
 - Make a cover page.
@@ -74,4 +74,3 @@ Tool used: Jest
 - Add filter image by categories option (background, sports, business, etc.
 - Add fitler image by color.
 - Build image slide show option.
-
