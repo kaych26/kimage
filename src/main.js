@@ -191,7 +191,7 @@ const reset = () => {
   popularImages => Set up popular word list to click.
 ------------------------------------------------------------*/
 const popularWords = () => {
-  const popular = ['nature', 'food', 'beach', 'flower', 'animal', 'car', 'wine', 'park', 'wallpaper'];
+  const popular = ['nature', 'food', 'beach', 'flower', 'animal', 'car', 'wine', 'paris', 'wallpaper'];
 
   popular.forEach(word => {
     let elem = document.createElement('a');
